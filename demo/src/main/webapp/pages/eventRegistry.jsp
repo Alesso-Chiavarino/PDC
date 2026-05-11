@@ -1,4 +1,5 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
+<%@ taglib prefix="c" uri="jakarta.tags.core" %>
 <html>
 <head>
     <title>eventRegistry</title>
@@ -7,14 +8,19 @@
 
 <jsp:useBean id="calendarList" class="com.alesso.demo.CalendarListBean" scope="session"></jsp:useBean>
 
-<c:if test="${!empty param}">
-    <jsp:useBean id="calendar" class="com.alesso.demo.CalendarBean">
-        <jsp:setProperty name="calendar" property="*"></jsp:setProperty>
-    </jsp:useBean>
-    ${calendarList.addCalendar(calendar)}
+<c:choose>
+    <c:when test="${param.action eq 'toggle' and param.index ne null}">
+        ${calendarList.toggleDiscarted(param.index)}
+        <c:redirect url="/index.jsp"/>
+    </c:when>
 
-    <jsp:forward page="/index.jsp" />
-</c:if>
+    <c:otherwise>
+        <jsp:useBean id="calendar" class="com.alesso.demo.CalendarBean"/>
+        <jsp:setProperty name="calendar" property="*"/>
+        ${calendarList.addCalendar(calendar)}
+        <c:redirect url="/index.jsp"/>
+    </c:otherwise>
+</c:choose>
 
 </body>
 </html>

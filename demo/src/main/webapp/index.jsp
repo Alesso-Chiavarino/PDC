@@ -54,14 +54,15 @@
 
             <div class="w-100">
                 <label for="emailToAdvise" class="form-label">E-mail a notificar</label>
-                <input type="email" class="form-control" name="emailToAdvise" id="emailToAdvise" placeholder="Ingrese E-mail a notificar">
+                <input type="email" class="form-control" name="emailToAdvise" id="emailToAdvise"
+                       placeholder="Ingrese E-mail a notificar">
             </div>
         </div>
         <button type="submit" class="btn btn-primary">Agendar</button>
         <button type="submit" class="btn btn-warning">Limpiar</button>
     </form>
 
-    <table class="table">
+    <table class="table table-light mt-5">
         <thead>
         <tr>
             <th scope="col">#</th>
@@ -69,18 +70,27 @@
             <th scope="col">Descripción</th>
             <th scope="col">Prioridad</th>
             <th scope="col">Notificar a</th>
+            <th scope="col">Acción</th>
         </tr>
         </thead>
         <tbody>
         <c:forEach var="ev" items="${calendarList.calendarList}" varStatus="st">
             <tr>
                 <th scope="row">${st.index + 1}</th>
-                <td>${ev.date}</td>
-                <td>${ev.description}</td>
-                <td>${ev.priority}</td>
-                <td>${ev.emailToAdvise}</td>
-                <td><button class="btn" >${ev.isDiscarted? 'Recuperar' : 'Descartar'}
-                </button></td>
+                <td class="${ev.discarted ? 'text-decoration-line-through text-danger' : ''}">${ev.date}</td>
+                <td class="${ev.discarted ? 'text-decoration-line-through text-danger' : ''}">${ev.description}</td>
+                <td class="${ev.discarted ? 'text-decoration-line-through text-danger' : ''}">${ev.priority}</td>
+                <td class="${ev.discarted ? 'text-decoration-line-through text-danger' : ''}">${ev.emailToAdvise}</td>
+                <td>
+                    <form method="post" action="${pageContext.request.contextPath}/pages/eventRegistry.jsp" class="m-0">
+                        <input type="hidden" name="action" value="toggle"/>
+                        <input type="hidden" name="index" value="${st.index}"/>
+                        <button id="discardBtn" type="submit"
+                                class="btn btn-link p-0 ${ev.discarted ? '' : 'text-danger'}">
+                                ${ev.discarted ? 'Recuperar' : 'Descartar'}
+                        </button>
+                    </form>
+                </td>
             </tr>
         </c:forEach>
         </tbody>
