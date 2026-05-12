@@ -4,7 +4,8 @@ const authorInput = document.getElementById("authorInput");
 const urlInput = document.getElementById("urlInput");
 const inputIdSetter = document.getElementById("inputIdSetter");
 const inputActionHandler = document.getElementById("inputActionHandler");
-const videoForm = document.getElementById("videoForm");
+const videoDetailModal = document.getElementById("videoDetailModal");
+const iframe = document.getElementById("iframe");
 
 const editVideo = (id, title, author, category, url) => {
     console.log("test edit", title, author, category, url)
@@ -25,3 +26,28 @@ const deleteVideo = (id) => {
         document.getElementById("videoForm").submit();
     }
 }
+
+const openModal = (url) => {
+    console.log("openModal")
+    const embedUrl = url.replace("watch?v=", "embed/");
+    iframe.setAttribute("src", embedUrl);
+    new bootstrap.Modal(videoDetailModal).show();
+}
+
+videoDetailModal.addEventListener('hidden.bs.modal', () => {
+    iframe.setAttribute("src", "");
+});
+
+/* machete eventos modal bootstrap
+
+ ┌─────────────────┬───────────────────────────────────────────┐
+│     Evento      │             Cuándo se dispara             │
+├─────────────────┼───────────────────────────────────────────┤
+│ show.bs.modal   │ Antes de abrirse                          │
+├─────────────────┼───────────────────────────────────────────┤
+│ shown.bs.modal  │ Después de abrirse (animación terminada)  │
+├─────────────────┼───────────────────────────────────────────┤
+│ hide.bs.modal   │ Antes de cerrarse                         │
+├─────────────────┼───────────────────────────────────────────┤
+│ hidden.bs.modal │ Después de cerrarse (animación terminada) │
+└─────────────────┴───────────────────────────────────────────┘*/

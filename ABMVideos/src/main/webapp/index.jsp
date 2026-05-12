@@ -78,15 +78,16 @@
                     <td>
                         <div class="d-flex justify-content-between p-2">
                             <div>
-                                <h3 class="text-primary">${vid.title}</h3>
+                                <h3 class="text-primary" style="cursor:pointer;"
+                                    onclick="openModal('${vid.url}')">${vid.title}</h3>
                                 <span>${vid.author}</span>
                             </div>
                             <div>
-                                <button id="editBtn" type="button" class="btn btn-primary"
+                                <button type="button" class="btn btn-primary"
                                         onclick="editVideo('${vid.id}', '${vid.title}', '${vid.author}', '${vid.category}', '${vid.url}')">
                                     Editar
                                 </button>
-                                <button id="deleteBtn" onclick="deleteVideo('${vid.id}')" class="btn btn-success
+                                <button onclick="deleteVideo('${vid.id}')" class="btn btn-success
                                 ">Eliminar
                                 </button>
                             </div>
@@ -100,5 +101,26 @@
 </main>
 
 
+<!-- Button trigger modal -->
+
+
+<!-- Modal -->
+<div id="videoDetailModal" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="myModalLabel"
+     aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-bs-dismiss="modal" aria-hidden="true">×</button>
+            </div>
+            <div class="modal-body">
+                <iframe id="iframe"
+                        src=""
+                        title="YouTube video player" frameborder="0"
+                        allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+                        referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
+            </div>
+        </div>
+    </div>
+</div>
 </body>
 </html>
