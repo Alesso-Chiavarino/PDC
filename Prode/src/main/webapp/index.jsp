@@ -11,6 +11,9 @@
     <script src="${pageContext.request.contextPath}/js/index.js" defer></script>
 </head>
 <body>
+<jsp:useBean id="matchList" class="com.alesso.prode.MatchListBean" scope="session"></jsp:useBean>
+
+
 <main class="container mx-auto py-5">
     <h1>
         Prode
@@ -27,38 +30,49 @@
         </tr>
         </thead>
         <tbody>
-        <tr>
-            <td class="px-5">EQUIPO A</td>
-            <td>
-                <div class="form-check">
-                    <input class="form-check-input" type="checkbox" value="" id="localCheckbox">
-                    <label hidden="hidden" class="form-check-label" for="localCheckbox">
-                        localCheckbox
-                    </label>
-                </div>
-            </td>
-            <td>
-                <div class="form-check">
-                    <input class="form-check-input" type="checkbox" value="" id="drawCheckbox">
-                    <label hidden="hidden" class="form-check-label" for="drawCheckbox">
-                        drawCheckbox
-                    </label>
-                </div>
-            </td>
-            <td>
-                <div class="form-check">
-                    <input class="form-check-input" type="checkbox" value="" id="visitorCheckbox">
-                    <label hidden="hidden" class="form-check-label" for="visitorCheckbox">
-                        visitorCheckbox
-                    </label>
-                </div>
-            </td>
-            <td class="px-5">EQUIPO B</td>
-        </tr>
+        <c:forEach var="match" items="${matchList.matchList}" varStatus="st">
+            <tr>
+                <td class="px-5">${match.firstTeam}</td>
+                <td>
+                    <div class="form-check">
+                        <input class="form-check-input" onchange="onChangeCheckbox(event, '${st.index + 1}')"
+                               data-match-id="${st.index + 1}"
+                               type="checkbox" value=""
+                               id="localCheckbox">
+                        <label hidden="hidden" class="form-check-label" for="localCheckbox">
+                            localCheckbox
+                        </label>
+                    </div>
+                </td>
+                <td>
+                    <div class="form-check">
+                        <input class="form-check-input" onchange="onChangeCheckbox(event, '${st.index + 1}')"
+                               data-match-id="${st.index + 1}"
+                               type="checkbox" value=""
+                               id="drawCheckbox">
+                        <label hidden="hidden" class="form-check-label" for="drawCheckbox">
+                            drawCheckbox
+                        </label>
+                    </div>
+                </td>
+                <td>
+                    <div class="form-check">
+                        <input class="form-check-input" onchange="onChangeCheckbox(event, '${st.index + 1}')"
+                               data-match-id="${st.index + 1}"
+                               type="checkbox" value=""
+                               id="visitorCheckbox">
+                        <label hidden="hidden" class="form-check-label" for="visitorCheckbox">
+                            visitorCheckbox
+                        </label>
+                    </div>
+                </td>
+                <td class="px-5">${match.secondTeam}</td>
+            </tr>
+        </c:forEach>
         </tbody>
     </table>
     <div>
-        <button class="btn btn-primary">Resultado</button>
+        <button id="resultBtn" class="btn btn-primary">Resultado</button>
     </div>
 </main>
 
