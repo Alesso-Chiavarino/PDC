@@ -42,6 +42,6 @@ initLotteryBtn.addEventListener("click", async (e) => {
         }
 
         lotteryNumberList.insertAdjacentHTML("beforeend", html);
-    }, 2000);
+    }, 500);
 
 })

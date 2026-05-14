@@ -53,7 +53,7 @@ public class LotteryNumberListBean {
 
         int generated;
         do {
-            generated = (int) (Math.random() * 46);
+            generated = Double.class.cast(Math.random() * 45).intValue();
         } while (containsNumber(generated));
 
         LotteryNumberBean lotteryNumber = new LotteryNumberBean();
