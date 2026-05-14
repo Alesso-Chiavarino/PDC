@@ -29,7 +29,9 @@
             </div>
 
         </div>
-        <h1>El número es 14</h1>
+        <h1 id="currentNumberText" class="visually-hidden">El número es <span
+                id="currentNumberTextChild">{{NUMBER}}</span>
+        </h1>
     </div>
     <form id="gameForm">
         <div class="mb-3">
@@ -41,6 +43,9 @@
                 <option value="IGUAL">Igual a 10</option>
                 <option value="MENOR">Menor a 10</option>
             </select>
+        </div>
+        <div id="gameResultContainer">
+
         </div>
         <button type="submit" class="btn btn-primary">Probar suerte</button>
     </form>

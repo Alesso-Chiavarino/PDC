@@ -1,6 +1,10 @@
 const gameForm = document.getElementById("gameForm");
 const minorOrEqualThanList = document.getElementById("minorOrEqualThanList");
 const greaterThanList = document.getElementById("greaterThanList");
+const comparedNumber = 10;
+const currentNumberText = document.getElementById("currentNumberText");
+const currentNumberTextChild = document.getElementById("currentNumberTextChild");
+const gameResultContainer = document.getElementById("gameResultContainer");
 
 gameForm.addEventListener("submit", async (e) => {
 
@@ -22,7 +26,29 @@ gameForm.addEventListener("submit", async (e) => {
 
     const html = await response.text();
 
-    greaterThanList.insertAdjacentHTML("beforeend", html);
+    const temporalDiv = document.createElement("div");
+    temporalDiv.innerHTML = html
+
+    if (temporalDiv.firstElementChild.textContent === "Ganaste") {
+        return gameResultContainer.insertAdjacentHTML("beforeend", html);
+    }
+
+    if (temporalDiv.firstElementChild.textContent === "Perdiste") {
+        return gameResultContainer.insertAdjacentHTML("beforeend", html);
+    }
+
+    const generatedNumber = Number(temporalDiv.firstElementChild.textContent)
+
+
+    if (generatedNumber > comparedNumber) {
+        greaterThanList.insertAdjacentHTML("beforeend", html);
+    } else {
+        minorOrEqualThanList.insertAdjacentHTML("beforeend", html);
+    }
+
+    currentNumberTextChild.textContent = generatedNumber;
+    currentNumberText.classList = ""
+
 
     e.target.reset();
 
