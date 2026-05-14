@@ -1,16 +1,12 @@
-<%--
-  Created by IntelliJ IDEA.
-  User: alesso
-  Date: 13/05/2026
-  Time: 7:04 PM
-  To change this template use File | Settings | File Templates.
---%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
-<html>
-<head>
-    <title>Title</title>
-</head>
-<body>
+<%@ taglib prefix="c" uri="jakarta.tags.core" %>
 
-</body>
-</html>
+<jsp:useBean id="lotteryNumberList" class="com.alesso.quini.LotteryNumberListBean" scope="session"/>
+
+<c:set var="drawn" value="${lotteryNumberList.drawNextNumber()}"/>
+
+<c:if test="${drawn ne null}">
+    <jsp:include page="/components/numberLi.jsp">
+        <jsp:param name="lotteryNumber" value="${drawn.lotteryNumber}"/>
+    </jsp:include>
+</c:if>

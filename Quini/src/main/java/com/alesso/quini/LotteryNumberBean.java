@@ -4,30 +4,22 @@ import java.util.LinkedList;
 import java.util.List;
 
 public class LotteryNumberBean {
-    private List<Integer> lotteryNumbers = new LinkedList<>();
+    private Integer lotteryNumber;
 
-    public LotteryNumberBean() {
-        int num = generateNumber();
-
-        if (lotteryNumbers.size() < 6) {
-            lotteryNumbers.add(num);
-        }
-
+    public Integer getLotteryNumber() {
+        return lotteryNumber;
     }
 
-    private boolean isComplete() {
-        return lotteryNumbers.size() == 6;
+    public void setLotteryNumber(Integer lotteryNumber) {
+        this.lotteryNumber = lotteryNumber;
     }
 
-    public List<Integer> getLotteryNumbers() {
-        return lotteryNumbers;
-    }
-
-    public void setLotteryNumbers(List<Integer> lotteryNumbers) {
-        this.lotteryNumbers = lotteryNumbers;
-    }
 
     public Integer generateNumber() {
         return Double.class.cast(Math.random() * 45).intValue();
+    }
+
+    public void setGeneratedLotteryNumber() {
+        this.lotteryNumber = generateNumber();
     }
 }

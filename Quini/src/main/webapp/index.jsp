@@ -13,24 +13,7 @@
 <main class="container mx-auto py-5">
     <h1>Quini 6 </h1>
 
-    <ul class="list-unstyled d-flex gap-2">
-        <li class="bg-danger p-5  w-auto">
-            <span>
-                47
-            </span>
-        </li>
-        <li class="bg-danger p-5 w-auto">
-            <span>
-                47
-            </span>
-        </li>
-        <li class="bg-danger p-5 w-auto">
-            <span>
-                47
-            </span>
-        </li>
-
-
+    <ul id="lotteryNumberList" class="list-unstyled d-flex gap-2">
     </ul>
 
     <div>
