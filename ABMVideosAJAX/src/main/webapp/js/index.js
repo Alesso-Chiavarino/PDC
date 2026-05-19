@@ -1,20 +1,14 @@
-const categorySelect = document.getElementById("categorySelect");
-const titleInput = document.getElementById("titleInput");
-const authorInput = document.getElementById("authorInput");
-const urlInput = document.getElementById("urlInput");
-const inputIdSetter = document.getElementById("inputIdSetter");
-const inputActionHandler = document.getElementById("inputActionHandler");
 const videoDetailModal = document.getElementById("videoDetailModal");
 const iframe = document.getElementById("iframe");
-const videoForm = document.getElementById("videoForm");
+let action = "";
+let currentTargetId = "";
+const formWrapper = document.getElementById('formWrapper')
 
-videoForm.addEventListener("submit", async (e) => {
+formWrapper.addEventListener("submit", async (e) => {
     e.preventDefault();
 
     const data = new FormData(e.target);
     let URL;
-
-    const action = inputActionHandler.value;
 
     switch (action) {
         case '': {
@@ -27,12 +21,15 @@ videoForm.addEventListener("submit", async (e) => {
         }
     }
 
+    const params = new URLSearchParams(data)
+    if (action === "edit") params.append("id", currentTargetId);
+
     const response = await fetch(URL, {
         method: "POST",
         headers: {
             "Content-Type": "application/x-www-form-urlencoded"
         },
-        body: new URLSearchParams(data)
+        body: params
     });
 
     if (!response.ok) {
@@ -47,24 +44,33 @@ videoForm.addEventListener("submit", async (e) => {
             break;
         }
         case 'edit': {
-            document.getElementById("row-" + inputIdSetter.value).outerHTML = html;
+            document.getElementById("row-" + currentTargetId).outerHTML = html;
             break;
         }
     }
 
-    e.target.reset();
+    action = "";
+    currentTargetId = "";
+    formWrapper.innerHTML = await fetch("components/form.jsp").then(r => r.text());
 
 })
 
-const editVideo = (id, title, author, category, url) => {
-    console.log("test edit", title, author, category, url)
-    titleInput.value = title;
-    authorInput.value = author;
-    categorySelect.value = category;
-    urlInput.value = url;
+const editVideo = async (id) => {
+    const response = await fetch("actions/getForm.jsp", {
+        method: "POST",
+        headers: {"Content-Type": "application/x-www-form-urlencoded"},
+        body: new URLSearchParams({id, action: "post"})
+    });
 
-    inputIdSetter.value = id;
-    inputActionHandler.value = "edit";
+    if (!response.ok) throw new Error(response.statusText);
+
+    const html = await response.text();
+
+    formWrapper.innerHTML = html;
+
+    currentTargetId = id;
+    action = "edit";
+    console.log("1", action)
 
 }
 
@@ -84,7 +90,6 @@ const deleteVideo = async (id) => {
 
 
 const openModal = (url) => {
-    console.log("openModal")
     const embedUrl = url.replace("watch?v=", "embed/");
     iframe.setAttribute("src", embedUrl);
     new bootstrap.Modal(videoDetailModal).show();

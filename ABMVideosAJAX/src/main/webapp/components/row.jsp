@@ -10,7 +10,7 @@
             </div>
             <div>
                 <button type="button" class="btn btn-primary"
-                        onclick="editVideo('${param.id}', '${param.title}', '${param.author}', '${param.category}', '${param.url}')">
+                        onclick="editVideo('${param.id}')">
                     Editar
                 </button>
                 <button onclick="deleteVideo('${param.id}')" class="btn btn-success

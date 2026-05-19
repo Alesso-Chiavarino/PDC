@@ -24,12 +24,8 @@ public class VideoListBean {
         this.videoListBean.add(videoBean);
     }
 
-    public void updateInList(VideoBean videoBean) {
-        VideoBean filteredVideo = videoListBean
-                .stream()
-                .filter(vid -> vid.getId().equals(videoBean.getId()))
-                .findFirst()
-                .orElse(null);
+    public void updateInList(String id, VideoBean videoBean) {
+        VideoBean filteredVideo = this.getVideoById(id);
 
         if (filteredVideo == null) {
             return;
@@ -47,6 +43,14 @@ public class VideoListBean {
                 .filter(vid -> !vid.getId().equals(id))
                 .collect(Collectors.toList());
 
+
+    }
+
+    public VideoBean getVideoById(String id) {
+        return this.videoListBean.stream()
+                .filter(video -> video.getId().equals(id))
+                .findFirst()
+                .orElse(null);
 
     }
 }

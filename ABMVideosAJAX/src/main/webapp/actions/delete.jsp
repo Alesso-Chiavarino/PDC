@@ -3,10 +3,8 @@
 
 <jsp:useBean id="videoList" class="com.alesso.abmvideos.VideoListBean" scope="session"></jsp:useBean>
 
-<c:if test="${!empty param.action && param.action eq 'delete'}">
-    <jsp:useBean id="video" class="com.alesso.abmvideos.VideoBean"/>
-    <jsp:setProperty name="video" property="*"/>
-    ${videoList.deleteInList(video.id)}
-</c:if>
+<jsp:useBean id="video" class="com.alesso.abmvideos.VideoBean"/>
+<jsp:setProperty name="video" property="*"/>
+${videoList.deleteInList(video.id)}
 
 <jsp:include page="/components/row.jsp"></jsp:include>
