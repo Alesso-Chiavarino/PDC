@@ -224,13 +224,24 @@ ${fn:substring(param.codigo, 0, 3)}
 <!-- 15) FMT FECHAS Y NUMEROS -->
 <!-- ===================================================== -->
 
-<!-- parseDate de String a Date -->
+<!-- CASO A) Si YA te viene Date (bean.getFecha() devuelve Date) -->
+<!-- No parseas, solo formateas -->
+<fmt:formatDate value="${pedido.fechaEntrega}" pattern="dd/MM/yyyy" />
+
+<!-- CASO B) Si te viene String en formato ISO (ej: 2026-11-16) -->
+<!-- Primero parseas String -> Date, despues formateas -->
 <fmt:parseDate value="${param.fechaEntregaTxt}"
                pattern="yyyy-MM-dd"
-               var="fechaEntregaDate" />
+               var="fechaEntregaDateIso" />
+<fmt:formatDate value="${fechaEntregaDateIso}" pattern="dd/MM/yyyy" />
 
-<!-- formatDate -->
-<fmt:formatDate value="${fechaEntregaDate}" pattern="dd/MM/yyyy" />
+<!-- CASO C) Si te viene String tipo Date.toString() -->
+<!-- Ejemplo: Tue Nov 16 00:00:00 ART 2026 -->
+<fmt:parseDate value="${param.fechaEntregaJava}"
+               pattern="EEE MMM dd HH:mm:ss z yyyy"
+               parseLocale="en_US"
+               var="fechaEntregaDateJava" />
+<fmt:formatDate value="${fechaEntregaDateJava}" pattern="dd/MM/yyyy" />
 
 <!-- formatNumber -->
 <fmt:formatNumber value="${producto.cantidad}" minFractionDigits="0" maxFractionDigits="2" />

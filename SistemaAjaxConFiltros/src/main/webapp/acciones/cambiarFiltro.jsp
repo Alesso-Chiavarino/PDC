@@ -1,0 +1,9 @@
+<%@ page contentType="text/html;charset=UTF-8" language="java" %>
+<%@ taglib prefix="c" uri="jakarta.tags.core" %>
+
+<jsp:useBean id="manager" class="com.alesso.sistemaajaxconfiltros.PedidoManagerBean" scope="session"/>
+
+<c:set var="noop" value="${manager.cambiarFiltro(param.filtroNuevo)}"/>
+<c:set var="pedidosPaginados" value="${manager.pedidosPaginados}" scope="request"/>
+
+<jsp:include page="/componentes/pedidosPanel.jsp"/>

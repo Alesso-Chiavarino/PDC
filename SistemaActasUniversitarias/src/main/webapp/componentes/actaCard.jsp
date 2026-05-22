@@ -14,7 +14,7 @@
             <!-- REQUISITO: Esta fecha viene como Date. Debe formatearse con JSTL fmt:formatDate pattern="dd/MM/yyyy" -->
             <span class="text-muted ms-2 me-2">
                     <i class="bi bi-calendar-event"></i>
-                   (Fecha: <fmt:formatDate value="${acta.fechaExamen}" pattern="dd/MM/yy"/>)
+                   (Fecha: <fmt:formatDate value="${acta.fechaExamen}" pattern="dd/MM/yyyy"/>)
                 </span>
 
             <c:choose>
