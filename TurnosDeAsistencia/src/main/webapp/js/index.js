@@ -1,15 +1,14 @@
 const asistenciasContainer = document.getElementById("asistenciasContainer");
 let action = "";
 let idAsistencia;
+let asignarBtn;
+let cancelarBtn;
+let guardarBtn;
+let apellidoInput;
+let nombreInput;
+let correoInput;
 
 const onCancel = (id) => {
-    let asignarBtn;
-    let cancelarBtn;
-    let guardarBtn;
-    let apellidoInput;
-    let nombreInput;
-    let correoInput;
-
     if (!id) {
         asignarBtn = document.getElementById(`asignarBtn`);
         cancelarBtn = document.getElementById(`guardarBtn`);
@@ -40,13 +39,6 @@ const onCancel = (id) => {
 
 
 const onSave = (id) => {
-    let asignarBtn;
-    let cancelarBtn;
-    let guardarBtn;
-    let apellidoInput;
-    let nombreInput;
-    let correoInput;
-
     if (!id) {
         asignarBtn = document.getElementById(`asignarBtn`);
         cancelarBtn = document.getElementById(`guardarBtn`);
@@ -72,13 +64,6 @@ const onSave = (id) => {
 }
 
 const onAssign = (id) => {
-    let asignarBtn;
-    let cancelarBtn;
-    let guardarBtn;
-    let apellidoInput;
-    let nombreInput;
-    let correoInput;
-
     if (!id) {
         asignarBtn = document.getElementById(`asignarBtn`);
         cancelarBtn = document.getElementById(`guardarBtn`);
