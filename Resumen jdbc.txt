@@ -1,0 +1,525 @@
+POM
+
+<dependency>
+            <groupId>org.webjars</groupId>
+            <artifactId>bootstrap</artifactId>
+            <version>5.3.8</version>
+        </dependency>
+        <dependency>
+            <groupId>jakarta.servlet.jsp.jstl</groupId>
+            <artifactId>jakarta.servlet.jsp.jstl-api</artifactId>
+            <version>3.0.1</version>
+        </dependency>
+        <dependency>
+            <groupId>org.glassfish.web</groupId>
+            <artifactId>jakarta.servlet.jsp.jstl</artifactId>
+            <version>3.0.1</version>
+        </dependency>
+        <dependency>
+            <groupId>com.microsoft.sqlserver</groupId>
+            <artifactId>mssql-jdbc</artifactId>
+            <version>13.5.0.jre11-preview</version>
+            <scope>compile</scope>
+        </dependency>
+
+utils.js
+
+const jUtils = {
+
+    getElement: (containerId) => {
+        const element = document.getElementById(containerId);
+        if (!element) {
+            throw new Error('No existe el elemento');
+        }
+        return element;
+    },
+
+    show: (containerId, html = null) => {
+        const container = jUtils.getElement(containerId);
+        if (html !== null) {
+            container.innerHTML = html;
+            jUtils.executeScripts(container);
+        }
+        container.classList.remove('d-none');
+    },
+
+    hide: (containerId) => {
+        const container = jUtils.getElement(containerId);
+        container.classList.add('d-none');
+    },
+
+    clean: (containerId) => {
+        const container = jUtils.getElement(containerId);
+        container.classList.add('d-none');
+        container.innerHTML = '';
+    },
+
+    executeScripts: (container) => {
+        const scripts = container.querySelectorAll('script');
+        scripts.forEach(oldScript => {
+            const newScript = document.createElement('script');
+            Array.from(oldScript.attributes).forEach(attr => {
+                newScript.setAttribute(attr.name, attr.value);
+            });
+            newScript.textContent = oldScript.textContent;
+            oldScript.parentNode.replaceChild(newScript, oldScript);
+        });
+    },
+
+    showLoading: () => {
+        if (document.getElementById('iLoading')) {
+            return;
+        }
+
+        const loader = document.createElement('div');
+        loader.id = 'iLoading';
+        loader.className = 'loading-overlay d-flex justify-content-center align-items-center';
+        loader.innerHTML = `
+            <div
+                class="spinner-border text-light"
+                style="width: 4rem; height: 4rem;"
+                role="status"
+                aria-hidden="true">
+            </div>
+        `;
+
+        Object.assign(loader.style, {
+            position: 'fixed',
+            top: '0',
+            left: '0',
+            width: '100vw',
+            height: '100vh',
+            backgroundColor: 'rgba(0, 0, 0, 0.5)',
+            zIndex: '10000'
+        });
+        document.body.appendChild(loader);
+    },
+
+    hideLoading: () => {
+        const loader = document.getElementById('iLoading');
+        if (loader) {
+            loader.remove();
+        }
+    }
+
+};
+
+Ejemplo index.js
+
+formBusqueda.addEventListener("submit", async (event) => {
+
+    event.preventDefault();
+
+    try {
+        jUtils.clean("iError");
+        jUtils.showLoading();
+
+        const data = new FormData(event.target);
+        const response = await fetch("buscarReserva.jsp", {
+            method: "POST",
+            headers: {
+                "Content-Type": "application/x-www-form-urlencoded"
+            },
+            body: new URLSearchParams(data)
+        })
+
+        const text = await response.text();
+
+        if (!response.ok) {
+            document.getElementById("body").insertAdjacentHTML("afterbegin", text);
+
+            const modalEl = document.getElementById("errorModal");
+            if (modalEl) {
+                const existingModal = bootstrap.Modal.getInstance(modalEl);
+                if (existingModal) existingModal.dispose();
+
+                new bootstrap.Modal(modalEl).show();
+            }
+            return;
+        }
+
+        document.getElementById("upgradeReservaContainer").innerHTML = text;
+
+    } catch (e) {
+        jUtils.show("iError", e.message);
+    } finally {
+        jUtils.hideLoading();
+    }
+
+});
+
+Ejemplo Servlet SP
+
+package ubp.pdc.ar.jdbc.aerolinea.servlets;
+
+import jakarta.servlet.ServletException;
+import jakarta.servlet.annotation.WebServlet;
+import jakarta.servlet.http.HttpServlet;
+import jakarta.servlet.http.HttpServletRequest;
+import jakarta.servlet.http.HttpServletResponse;
+import ubp.pdc.ar.jdbc.aerolinea.beans.ReservaBean;
+
+import java.io.IOException;
+import java.sql.*;
+
+@WebServlet("/buscarReserva.jsp")
+public class ConsultarReservaServlet extends HttpServlet {
+
+    @Override
+    protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+
+        try {
+            Class.forName("com.microsoft.sqlserver.jdbc.SQLServerDriver");
+
+            try (Connection conn = DriverManager.getConnection("jdbc:sqlserver://localhost;databaseName=pdc;encrypt=false", "sa", "YourStrong@Password123");
+                 CallableStatement stmt = conn.prepareCall("{CALL dbo.val_reserva(?,?)}")) {
+
+                stmt.setString(1, req.getParameter("documento"));
+                stmt.setString(2, req.getParameter("codReserva"));
+
+                ResultSet rs = stmt.executeQuery();
+                ReservaBean reservaBean = new ReservaBean();
+                if (rs.next()) {
+
+                    reservaBean.setApellido(rs.getString("apellido"));
+                    reservaBean.setNombre(rs.getString("nombre"));
+                    reservaBean.setNroCliente(rs.getInt("nroCliente"));
+                    reservaBean.setTipoClaseDesc(rs.getString("tipoClaseDesc"));
+                    reservaBean.setTipoClase(rs.getString("tipoClase"));
+                    reservaBean.setFechaReserva(rs.getString("fechaReserva"));
+                    reservaBean.setNroReserva(rs.getInt("nroReserva"));
+                }
+
+                req.setAttribute("reserva", reservaBean);
+                req.getRequestDispatcher("formularioUpradeVuelo.jsp").forward(req, resp);
+
+            } catch (SQLException e) {
+                throw e;
+            }
+
+        } catch (ClassNotFoundException | SQLException e) {
+            resp.setStatus(HttpServletResponse.SC_BAD_REQUEST);
+            req.setAttribute("error", e.getMessage());
+            req.getRequestDispatcher("/error-modal.jsp").forward(req, resp);
+        }
+    }
+}
+
+Ejemplo Servlet PreparedStatement
+
+package ubp.pdc.ar.jdbc.aerolinea.servlets;
+
+import jakarta.servlet.ServletException;
+import jakarta.servlet.annotation.WebServlet;
+import jakarta.servlet.http.HttpServlet;
+import jakarta.servlet.http.HttpServletRequest;
+import jakarta.servlet.http.HttpServletResponse;
+import ubp.pdc.ar.jdbc.aerolinea.beans.ReservaBean;
+
+import java.io.IOException;
+import java.sql.*;
+
+@WebServlet("/cargarOferta.jsp")
+public class CargarOferta extends HttpServlet {
+
+    @Override
+    protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+
+        try {
+            Class.forName("com.microsoft.sqlserver.jdbc.SQLServerDriver");
+
+            try (Connection conn = DriverManager.getConnection("jdbc:sqlserver://localhost;databaseName=pdc;encrypt=false", "sa", "YourStrong@Password123");) {
+
+                conn.setAutoCommit(false);
+
+                try (PreparedStatement stmt = conn.prepareStatement("insert into dbo.mejoras_reservas(nro_reserva, tipo_clase, monto)\n" +
+                        "values(?, ?, ?)");) {
+
+                    stmt.setInt(1, Integer.parseInt(req.getParameter("nroReserva")));
+                    stmt.setString(2, req.getParameter("claseDeseada"));
+                    stmt.setInt(3, Integer.parseInt(req.getParameter("montoOfrecido")));
+
+                    stmt.execute();
+                    conn.commit();
+
+                    req.getRequestDispatcher("alertaExitoOferta.jsp").forward(req, resp);
+                } catch (SQLException e) {
+                    conn.rollback();
+                    throw e;
+                }
+            }
+        } catch (ClassNotFoundException | SQLException e) {
+            resp.setStatus(HttpServletResponse.SC_BAD_REQUEST);
+            req.setAttribute("error", e.getMessage());
+            req.getRequestDispatcher("/error-modal.jsp").forward(req, resp);
+        }
+    }
+
+}
+
+
+error-modal.jsp
+
+<%@ page contentType="text/html;charset=UTF-8" language="java" %>
+<!-- Modal de Error -->
+<div class="modal fade" id="errorModal" tabindex="-1" aria-labelledby="errorModalLabel">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="errorModalLabel">Error</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                ${!empty requestScope.error ? requestScope.error : exception}
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cerrar</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+index.js
+
+
+<%@ page contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" %>
+<%@taglib prefix="c" uri="jakarta.tags.core"%>
+<%@ taglib prefix="fmt" uri="jakarta.tags.fmt" %>
+<!DOCTYPE html>
+<html>
+<head>
+    <title>JSP - Hello World</title>
+    <meta charset="utf-8">
+    <link rel="stylesheet" href="${pageContext.request.contextPath}/webjars/bootstrap/5.3.8/css/bootstrap.min.css">
+    <script src="${pageContext.request.contextPath}/webjars/bootstrap/5.3.8/js/bootstrap.bundle.min.js" defer></script>
+    <script src="js/utils.js" defer></script>
+    <script src="js/index.js" defer></script>
+</head>
+<body>
+<h1><%= "Hello World!" %>
+</body>
+</html>
+
+
+Ejemplo session y null en servlet
+
+HttpSession session = req.getSession();
+                    Integer nro_carrito = (Integer) session.getAttribute("nroCarrito");
+
+                    if (nro_carrito != null) {
+                        stmt.setInt(1, nro_carrito);
+                    } else {
+                        stmt.setNull(1, Types.INTEGER);
+                    }
+
+
+Ejemplo out params y session
+
+HttpSession session = req.getSession();
+                    Integer nro_carrito = (Integer) session.getAttribute("nroCarrito");
+
+                    stmt.registerOutParameter(1, Types.INTEGER);
+                    if (nro_carrito != null) {
+                        stmt.setInt(1, nro_carrito);
+                    } else {
+                        stmt.setNull(1, Types.INTEGER);
+                    }
+                    stmt.setString(2, req.getParameter("cod_barra"));
+
+                    ResultSet rs = stmt.executeQuery();
+
+                    ProductoBean producto = new ProductoBean();
+
+                    if (rs.next()) {
+                        producto.setNroDetalle(rs.getInt("nroDetalle"));
+                        producto.setCodBarra(rs.getString("codBarra"));
+                        producto.setNomProducto(rs.getString("nomProducto"));
+                        producto.setPrecio(rs.getFloat("precio"));
+                    }
+                    rs.close();
+
+                    boolean hasMore = stmt.getMoreResults();
+                    while (hasMore || stmt.getUpdateCount() >= 0) {
+                        if (hasMore) {
+                            ResultSet extra = stmt.getResultSet();
+                            if (extra != null) extra.close();
+                        }
+                        hasMore = stmt.getMoreResults();
+                    }
+
+
+                    Integer nro_carrito_out = stmt.getInt(1);
+                    session.setAttribute("nroCarrito", nro_carrito_out);
+
+
+Ejemplo out params
+
+try (CallableStatement cs = conn.prepareCall(sql)) {
+
+                // 2. Registrar el parámetro IN
+                cs.setInt(1, 42);  // @id
+
+                // 3. Registrar los parámetros OUT con su tipo SQL
+                cs.registerOutParameter(2, Types.NVARCHAR);    // @nombre
+                cs.registerOutParameter(3, Types.DECIMAL);     // @salario
+                cs.registerOutParameter(4, Types.BIT);         // @encontrado
+
+                // 4. Ejecutar
+                cs.execute();
+
+                // 5. Leer los valores de salida
+                boolean encontrado = cs.getBoolean(4);
+
+                if (encontrado) {
+                    String nombre  = cs.getString(2);
+                    double salario = cs.getDouble(3);
+                    System.out.println("Nombre:  " + nombre);
+                    System.out.println("Salario: " + salario);
+                } else {
+                    System.out.println("Empleado no encontrado.");
+                }
+            }
+
+Ejemplo format
+
+<!-- Parsear el string a Date y formatearlo -->
+<fmt:parseDate value="${fechaStr}" pattern="yyyy-MM-dd" var="fecha" />
+<p>Fecha: <fmt:formatDate value="${fecha}" pattern="dd/MM/yyyy" /></p>
+
+Update o delete sin ResultSet
+
+Si el servlet actualiza datos y NO devuelve ResultSet:
+
+- En backend:
+  - usar executeUpdate()
+  - hacer commit() si hay transaccion
+  - devolver response.setStatus(200);
+  - tambien puede ser 204 No Content si no devolves nada
+
+- En frontend:
+  - verificar response.ok
+  - si salio bien, volver a lanzar otro fetch de busqueda para refrescar los datos
+  - esto sirve mucho cuando el servlet de update solo actualiza y no devuelve html nuevo
+
+Patron comun:
+
+const response = await fetch("./actualizarAlgo.jsp", {
+    method: "POST",
+    headers: {
+        "Content-Type": "application/x-www-form-urlencoded"
+    },
+    body: new URLSearchParams({...})
+});
+
+if (!response.ok) {
+    const text = await response.text();
+    throw new Error(text || response.statusText);
+}
+
+await jListados.buscar(...);
+
+Idea mental:
+
+- buscar: trae datos
+- actualizar: modifica datos
+- si actualizar sale bien, vuelvo a buscar
+
+Cookies
+
+Las cookies sirven para guardar un dato chico en el navegador del usuario.
+Se usan mucho para:
+
+- recordar un valor
+- saber si ya entro antes
+- guardar una preferencia
+- mantener algun dato simple entre requests
+
+Backend: crear cookie
+
+Cookie cookie = new Cookie("nombreCookie", "valorCookie");
+cookie.setMaxAge(60 * 60 * 24); // 1 dia
+cookie.setPath("/");
+resp.addCookie(cookie);
+
+Backend: leer cookies
+
+Cookie[] cookies = req.getCookies();
+
+if (cookies != null) {
+    for (Cookie cookie : cookies) {
+        if ("nombreCookie".equals(cookie.getName())) {
+            String valor = cookie.getValue();
+        }
+    }
+}
+
+Backend: borrar cookie
+
+Cookie cookie = new Cookie("nombreCookie", "");
+cookie.setMaxAge(0);
+cookie.setPath("/");
+resp.addCookie(cookie);
+
+Como pensarlo en un ejercicio de la profe
+
+Si el ejercicio pide recordar algo entre visitas, yo lo haria asi:
+
+1. En el servlet leo las cookies con req.getCookies()
+2. Busco si existe la cookie que me interesa
+3. Si existe:
+   - uso ese valor
+   - lo mando al jsp con request.setAttribute(...)
+4. Si no existe:
+   - sigo normal
+5. Cuando el usuario hace una accion importante:
+   - creo o actualizo la cookie con resp.addCookie(...)
+
+Ejemplo mental de parcial
+
+Caso 1:
+- "recordar ultimo criterio de busqueda"
+- guardo una cookie con el texto buscado o el codigo seleccionado
+- cuando vuelve a entrar, leo la cookie y completo el form
+
+Caso 2:
+- "recordar nombre del usuario"
+- al registrar o ingresar, guardo cookie con nombre o email
+- en el jsp muestro "bienvenido X"
+
+Caso 3:
+- "mostrar ultima opcion seleccionada"
+- guardo el value del select en cookie
+- al recargar, leo la cookie y dejo esa opcion marcada
+
+Como lo implementaria rapido yo
+
+- Si el dato solo sirve para esta sesion de navegador:
+  - puedo usar session
+- Si el dato debe quedar aunque cierre y abra:
+  - uso cookie
+
+Patron rapido
+
+En GET inicial:
+- leo cookie
+- si existe, request.setAttribute("valorGuardado", valor)
+- forward al jsp
+
+En POST o accion:
+- proceso normalmente
+- creo o actualizo cookie
+- response.setStatus(200) o forward segun el ejercicio
+
+Ejemplo rapido
+
+Cookie ultimaBusqueda = new Cookie("ultimaBusqueda", req.getParameter("textoBusqueda"));
+ultimaBusqueda.setMaxAge(60 * 60 * 24 * 7);
+ultimaBusqueda.setPath("/");
+resp.addCookie(ultimaBusqueda);
+
+Ojo
+
+- req.getCookies() puede venir null
+- siempre comparar el nombre con equals
+- si queres borrar la cookie: MaxAge en 0
+- si el jsp tiene que usar ese valor, mandarlo por requestScope
