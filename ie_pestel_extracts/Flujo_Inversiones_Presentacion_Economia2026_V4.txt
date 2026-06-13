@@ -1,0 +1,110 @@
+--- DIAPOSITIVA 1 ---
+Análisis estratégico para la gestión eficiente de recursos Flujo de Inversiones y Evaluación de Proyectos
+
+--- DIAPOSITIVA 2 ---
+Introducción al Flujo de Inversiones
+
+--- DIAPOSITIVA 3 ---
+Análisis de inversiones Estudia decisiones de desembolsos presentes con expectativas de beneficios futuros bajo riesgo e incertidumbre. Evaluación de proyectos Determina si los ingresos son suficientes para justificar inversión, tiempo y riesgo asumidos. Flujo de inversiones Ordena cronológicamente egresos e ingresos para aplicar herramientas financieras de evaluación. Criterios de decisión Aplicación de criterios como VAN y TIR para tomar decisiones racionales de inversión. Flujo de Inversiones y Evaluación de Proyectos
+
+--- DIAPOSITIVA 4 ---
+Decisión de inversión Invertir implica sacrificar recursos presentes con la expectativa de beneficios futuros no seguros ni inmediatos. Herramientas de evaluación Se requieren herramientas objetivas para evaluar alternativas y tomar decisiones financieras racionales y cuantificables. Conceptos clave Flujo de fondos, valor del dinero en el tiempo y riesgo son esenciales para analizar inversiones correctamente. Introducción: el problema de invertir
+
+--- DIAPOSITIVA 5 ---
+Objetivo del análisis de inversiones El análisis evalúa la conveniencia financiera de un proyecto mediante el estudio de ingresos y egresos a lo largo del tiempo. Valor temporal del dinero El dinero tiene distinto valor según el tiempo debido a inflación, riesgo y costo de oportunidad. Importancia en economías volátiles El análisis es crucial en economías con alta inflación y volatilidad para evitar pérdidas financieras. Técnicas de actualización y capitalización Se usan métodos para comparar ingresos y egresos en términos homogéneos considerando el tiempo. Concepto general y objetivo del análisis de inversiones
+
+--- DIAPOSITIVA 6 ---
+Valor del dinero en el tiempo Concepto fundamental financiero El valor del dinero en el tiempo es esencial para entender y analizar inversiones correctamente. Factores que afectan el valor Inflación reduce poder adquisitivo, riesgo genera incertidumbre, y costo de oportunidad representa alternativas de inversión. Uso en análisis de proyectos Permite la actualización y capitalización de flujos para comparar valores presentes y futuros en proyectos. Importancia para indicadores financieros Base para interpretar VAN, TIR y comparar alternativas con diferentes duraciones y estructuras de flujo.
+
+--- DIAPOSITIVA 7 ---
+Interés Simple Interés Compuesto
+
+--- DIAPOSITIVA 8 ---
+Interés simple El interés simple es el beneficio o costo que se genera únicamente sobre un capital inicial durante un tiempo determinado. Los intereses no se suman al capital inicial, por lo que el monto generado en cada período es siempre el mismo. 📐 Fórmula principal FV = P (1+rn) P: capital inicial r: tasa por período n: cantidad de períodos VF: valor futuro VA: Valor actual
+
+--- DIAPOSITIVA 9 ---
+El interés compuesto genera intereses sobre intereses, aumentando el capital de forma acelerada a lo largo del tiempo. Fórmula matemática El valor futuro se calcula multiplicando el capital por uno más la tasa de interés elevada al número de períodos. VF = P (1+r) n Importancia en inversiones El interés compuesto es fundamental para evaluar proyectos y estimar el crecimiento en inversiones a largo plazo. Impacto en contexto argentino Las altas tasas en Argentina potencian el efecto del interés compuesto, afectando inversiones y costos de endeudamiento. El interés compuesto y su impacto en las inversiones
+
+--- DIAPOSITIVA 10 ---
+Aspecto Interés Simple Interés Compuesto Base de cálculo Capital inicial Capital + intereses Crecimiento Lineal Exponencial Reinversión No Sí Resultado largo plazo Bajo Muy alto ⚖️ Diferencia clave “El interés compuesto es el motor del crecimiento financiero a largo plazo porque hace que el dinero trabaje sobre sí mismo.”
+
+--- DIAPOSITIVA 11 ---
+Grafico comparativo entre interes simple y compuesto Año Interés Simple ($) Interés Compuesto ($) Diferencia ($) 0 1.000 1.000 0 5 1.500 1.610 110 10 2.000 2.594 594 15 2.500 4.177 1.677 20 3.000 6.727 3.727 25 3.500 10.834 7.334 30 4.000 17.449 13.449 35 4.500 28.102 23.602 Tabla comparativa (Ejemplo: $1000 al 10% anual)
+
+--- DIAPOSITIVA 12 ---
+Créditos Bancarios y Tasas de Interés (Sistemas de amortización)
+
+--- DIAPOSITIVA 13 ---
+Sistema Francés Cuotas constantes con pago inicial mayor de intereses y amortización de capital creciente al final. Facilita planificación financiera. Sistema Alemán Amortización constante del capital con cuotas altas iniciales y decrecientes; reduce intereses totales pagados. Sistema Americano Bullet, pago solo de intereses durante la vida del préstamo y capital en un único pago final; mayor riesgo financiero. Leasing Alquiler con opción de compra, menor inversión inicial y ventajas fiscales para financiar bienes y equipos. Tipos de créditos bancarios: francés, alemán, americano y leasing
+
+--- DIAPOSITIVA 14 ---
+🔵 1. Sistema Francés (Cuotas constantes) 📌 Características Cuota fija durante todo el préstamo Intereses altos al inicio Amortización baja al inicio y creciente 📌 Fórmula de la cuota Dónde:: cuota: capital inicial: tasa por período: número de cuotas 🔵 2. Sistema Alemán (Amortización constante) 📌 Características Amortización fija Cuotas decrecientes Intereses bajan con el tiempo 📌 Fórmulas 🔵 3. Sistema Americano ( Bullet) 📌 Características No amortizás capital durante el plazo Pagás solo intereses periódicamente Capital se paga TODO al final 📌 Fórmula SISTEMAS DE AMORTIZACIÓN Cuando tomás un crédito, cada cuota tiene dos componentes: Dónde: Interés: pago por el uso del dinero (sobre saldo de deuda) Amortización: parte que reduce la deuda
+
+--- DIAPOSITIVA 15 ---
+🎯 📌 Ejemplo base (mismo crédito en los 3 sistemas) 💰 Monto: $100.000 📈 Tasa: 10% anual ⏳ Plazo: 5 años Pagás mucho interés al inicio Cuota cómoda y constante 🔵 1. Sistema Francés (cuota constante) Periodo Cuota Interés Amortización Saldo 1 26.379,75 10.000,00 16.379,75 83.620,25 2 26.379,75 8.362,03 18.017,72 65.602,53 3 26.379,75 6.560,25 19.819,50 45.783,03 4 26.379,75 4.578,30 21.801,44 23.981,59 5 26.379,75 2.398,16 23.981,59 0
+
+--- DIAPOSITIVA 16 ---
+🔴 2. Sistema Alemán (amortización constante) Periodo Cuota Interés Amortización Saldo 1 30.000 10.000 20.000 80.000 2 28.000 8.000 20.000 60.000 3 26.000 6.000 20.000 40.000 4 24.000 4.000 20.000 20.000 5 22.000 2.000 20.000 0 🟢 3. Sistema Americano (bullet) Periodo Cuota Interés Amortización Saldo 1 10.000 10.000 0 100.000 2 10.000 10.000 0 100.000 3 10.000 10.000 0 100.000 4 10.000 10.000 0 100.000 5 110.000 10.000 100.000 0 Pagás más al inicio Menor costo total de intereses Cuotas bajas al inicio Pago final muy grande (riesgo alto)
+
+--- DIAPOSITIVA 17 ---
+Francés (azul) → cuota constante Alemán (rosa) → cuota decreciente Americano (verde) → cuotas bajas y salto fuerte al final 👉 El americano tiene el mayor riesgo (explota al final). El alemán arranca caro pero se vuelve más liviano. El francés es el más estable (banco- friendly)
+
+--- DIAPOSITIVA 18 ---
+Francés → baja lento al principio, rápido al final Alemán → baja linealmente (más eficiente) Americano → no baja… hasta el final En el americano “ debés todo” casi hasta el final En el alemán reducís deuda más rápido → menor riesgo financiero El francés es intermedio
+
+--- DIAPOSITIVA 19 ---
+📊 🔥 Comparación final Intereses totales pagados Francés → $31.898 Alemán → $30.000 ✅ (más barato) Americano → $50.000 ❌ (más caro) 👉 “Para un mismo crédito, el sistema alemán minimiza el costo financiero total al amortizar más rápido el capital. El sistema francés distribuye el esfuerzo de pago de manera uniforme, mientras que el sistema americano prioriza liquidez de corto plazo pero genera un fuerte riesgo financiero al vencimiento.” 👉 “No todos los créditos son más caros por la tasa, sino por cómo se amortizan.”
+
+--- DIAPOSITIVA 20 ---
+👉 Es un contrato donde una entidad financiera (banco o leasing company) compra un bien (auto, maquinaria, equipo, etc.) y te lo alquila por un período determinado. Al final del contrato, podemos: 🔹 Opción 1: Comprar el bien 🔹 Opción 2: Devolverlo 🔹 Opción 3: Renovar el contrato LEASINg
+
+--- DIAPOSITIVA 21 ---
+👉 “El leasing es un mecanismo de financiamiento mediante el cual una entidad adquiere un bien y lo cede en uso a cambio de pagos periódicos, otorgando al usuario la opción de compra al final del contrato.” 👉 “El leasing permite optimizar el flujo de fondos al evitar un desembolso inicial elevado, funcionando como una herramienta estratégica para la gestión financiera y fiscal de activos productivos.” 📊 Estructura del leasing 👉 Es similar a un crédito, pero con una diferencia clave: ⚠️ El bien NO es tuyo hasta que ejerces la opción de compra 🔍 Características principales ✅ No es necesario comprar el bien al inicio ✅ Financia hasta el 100% ✅ Puede tener beneficios impositivos ✅ Cuotas generalmente fijas ✅ Incluye opción de compra final
+
+--- DIAPOSITIVA 22 ---
+Definición de TNA La Tasa Nominal Anual no considera la capitalización de intereses dentro del año, reflejando una tasa de referencia básica. Definición de TEA La Tasa Efectiva Anual incluye el efecto del interés compuesto y la frecuencia de capitalización anual. Importancia en Argentina En contextos inflacionarios argentinos, la diferencia entre TNA y TEA es crucial para evaluar costos y rentabilidad. Uso adecuado de tasas Seleccionar la tasa correcta evita subestimar costos o sobreestimar ganancias en proyectos financieros. TNA y TEA
+
+--- DIAPOSITIVA 23 ---
+🔹TEA ( Tasa Efectiva Anual) Es la tasa real anual, porque sí incluye capitalización. Refleja el efecto del interés compuesto. Es la que realmente te dice cuánto vas a ganar o pagar en un año. 📌 Fórmula: 🔹 TNA (Tasa Nominal Anual) Es una tasa expresada en términos anuales, pero sin considerar capitalización. Se usa como referencia base en bancos y créditos. Para aplicarla, hay que dividirla según la frecuencia de pago. 📌 Fórmula (si capitaliza varias veces): donde: = cantidad de períodos en el año (12 si es mensual, 365 si es diaria, etc.) ✅ Ejemplo: TNA = 24% anual Capitalización mensual 🔹 Tasa real vs tasa nominal (con inflación) Relación de Fisher: Ejemplo:, inflación 📌 En proyectos a varios años se debe definir si se trabaja con moneda nominal (con inflación) o en moneda real (sin inflación).
+
+--- DIAPOSITIVA 25 ---
+Estructura del Flujo de Fondos
+
+--- DIAPOSITIVA 26 ---
+Inversión Inicial (CAPEX) La inversión inicial incluye gastos en maquinaria, equipos, infraestructura y software para iniciar el proyecto. Capital de Trabajo Fondos necesarios para operación inicial, cubriendo sueldos, insumos y stock, recuperable al final. Valor Residual Valor de los activos al final del proyecto, impactando la rentabilidad si se estima correctamente. Estrructura del flujo de fondos
+
+--- DIAPOSITIVA 27 ---
+🎯 ¿Qué es la evaluación de proyectos? Es el proceso mediante el cual se analiza si una inversión es rentable o no, comparando: 💸 Inversión inicial 💰 Flujos de fondos futuros 📉 Costo de capital 👉 El objetivo es maximizar el valor para el inversor. 🔑 CONCEPTOS FUNDAMENTALES ✅ Flujo de fondos Es la diferencia entre ingresos y egresos del proyecto en cada período: ✅ Valor del dinero en el tiempo Un peso hoy vale más que un peso mañana. 👉 Por eso se utiliza una tasa de descuento. ✅ Tasa de descuento (r)
+
+--- DIAPOSITIVA 28 ---
+Criterios de Decisión
+
+--- DIAPOSITIVA 29 ---
+Valor Actual Neto (VAN) El VAN trae flujos futuros a valor presente restando la inversión, indicando si un proyecto genera valor. Tasa Interna de Retorno (TIR) La TIR es la tasa que iguala el VAN a cero, mostrando la rentabilidad promedio del proyecto. Retorno sobre la Inversión (ROI) El ROI mide la ganancia en relación con la inversión, aunque no considera el valor temporal del dinero. Payback El Payback indica el tiempo para recuperar la inversión, útil para medir liquidez y riesgo. VAN, TIR, ROI y Payback
+
+--- DIAPOSITIVA 30 ---
+🟢 VAN (Valor Actual Neto) Mide cuánto valor genera el proyecto hoy. ✔️ Criterio: VAN > 0 → ✅ Aceptar VAN = 0 → ⚖️ Indiferente VAN < 0 → ❌ Rechazar 🔵 TIR (Tasa Interna de Retorno) Es la tasa que hace que el VAN sea cero: ✔️ Criterio: TIR > tasa requerida → ✅ Aceptar TIR < tasa requerida → ❌ Rechazar 🧮 ROI (Retorno Sobre la Inversion) El ROI te dice cuánto ganaste (o perdiste) en relación con lo que invertiste. ✔️ Criterio: ROI > 0 → ✅ Inversión rentable ROI = 0 → ⚖️ Empate ROI < 0 → ❌ Pérdida 👉 Cuanto más alto el ROI, mejor ✔️ Criterio: VAN > 0 → ✅ Aceptar VAN = 0 → ⚖️ Indiferente VAN < 0 → ❌ Rechazar ✔️ Criterio: TIR > tasa requerida → ✅ Aceptar TIR < tasa requerida → ❌ Rechazar 🧮 ROI (Retorno Sobre la Inversion) El ROI te dice cuánto ganaste (o perdiste) en relación con lo que invertiste. ✔️ Criterio: ROI > 0 → ✅ Inversión rentable ROI = 0 → ⚖️ Empate ROI < 0 → ❌ Pérdida 👉 Cuanto más alto el ROI, mejor
+
+--- DIAPOSITIVA 31 ---
+💰 ¿QUÉ ES LA TASA DE DESCUENTO? La tasa de descuento (r) es la tasa que se utiliza para traer los flujos de dinero futuros al valor presente. Es el rendimiento mínimo que exige el inversor para aceptar un proyecto. 🎯 Interpretación económica La tasa de descuento refleja: 1. ⏳ Valor del dinero en el tiempo $1 hoy vale más que $1 mañana Porque el dinero puede invertirse 2. 📉 Riesgo Proyectos más riesgosos → requieren mayor tasa 3. 💸 Costo de oportunidad Qué podríamos ganar invirtiendo en otra cosa
+
+--- DIAPOSITIVA 32 ---
+🧮 EJEMPLO DE APLICACIÓN 🎯 Proyecto: Instalación de un sistema productivo 📌 Datos: Inversión inicial = $10.000 Vida útil = 5 años Flujo anual = $3.000 Valor residual = $2.000 Tasa de descuento = 10% Año Flujo 0 -10.000 1 3.000 2 3.000 3 3.000 4 3.000 5 5.000 (incluye residual) 📊 Paso 1: Flujo de fondos
+
+--- DIAPOSITIVA 33 ---
+📉 Paso 2: Calcular VAN Calculando: Año 1: 2727 Año 2: 2479 Año 3: 2254 Año 4: 2049 Año 5: 3105 👉 Suma = 12.614 ✅ VAN = $2.614 → Proyecto rentable 📈 Paso 3: Interpretación de la TIR La TIR de este proyecto es aproximadamente: 👉 ≈ 18% ✅ Como: TIR (18%) > 10% → Se acepta
+
+--- DIAPOSITIVA 34 ---
+“Este gráfico muestra cómo cambia el valor del proyecto cuando varía la tasa de descuento.A medida que aumenta la tasa —es decir, el riesgo o el costo de capital— el VAN disminuye.El punto donde la curva corta el eje es la TIR: la tasa en la cual el proyecto deja de generar valor.” A menor tasa → mayor VAN A mayor tasa → menor VAN 👉 VAN = 0 → TIR (~18%)
+
+--- DIAPOSITIVA 35 ---
+⏱️ Paso 4: Payback Acumulado: Año Flujo acumulado 1 3.000 2 6.000 3 9.000 4 12.000 👉 Recupera inversión entre año 3 y 4 ✅ Payback ≈ 3,3 años
+
+--- DIAPOSITIVA 36 ---
+🧩 📊 Ejemplo de Flujo con crédito: 💰 Inversión inicial: 10.000 💳 Crédito: 5.000 📈 Tasa descuento: 10% 💵 Flujo operativo: 3.000 por año 🏁 Valor residual: 2.000 ⏳ Crédito: 24 meses (2 años) 📉 Sistema: Francés 🏦 Tasa crédito: 10% anual 🧾 Impuesto: 30% Cálculo del VAN 👉 VAN = $2.952 Cálculo de la TIR Buscamos la tasa que hace: 👉 TIR ≈ 24,05% Crédito 🔹 Cuota mensual: 👉 $230,72 🔹 Cuota anual equivalente: 👉 $2.768,70 Payback aproximado 👉 Payback ≈ 3,5 años
+
+--- DIAPOSITIVA 37 ---
+Analisis del flujo de inversión para distintos flujos o tasa de descurnto lo que modifican el VAN: Introducción al análisis Mismo flujo de fondos Se introduce la variación de la tasa Caso 1 r = 10% (caso base) Caso 2 r = 10% (el caso base + crédito) Caso 3 r ≈ TIR (VAN = 0) Caso 4 r = 20% (VAN negativo) Caso Tasa (r) VAN Relación con TIR Decisión 🟢 Caso base 10% +2614 r < TIR ✅ Aceptar 🟢 Caso crédito 10% +2.952 r < TIR ✅ Aceptar ⚖️ Caso 3 18% ≈ 0 r = TIR ⚖️ Indiferente 🔴 Caso 4 20% -225 r > TIR ❌ Rechazar “La TIR es la rentabilidad propia del proyecto. No cambia cuando varía la tasa de descuento: lo que cambia es la decisión. La tasa de descuento actúa como un umbral contra el cual se compara la TIR.” “Al incorporar financiamiento, el proyecto incrementa significativamente su TIR hasta un 24%, superando ampliamente la tasa de descuento del 10%, lo que evidencia el efecto positivo del apalancamiento financiero sobre la rentabilidad del capital propio.”
+
+--- DIAPOSITIVA 38 ---
+Metodología ordenada y coherente El análisis de inversiones sigue una metodología clara que garantiza resultados fiables y coherentes. Evaluación integral del proyecto Cada etapa del análisis permite entender la conveniencia y condiciones de viabilidad del proyecto. Toma de decisiones racionales El análisis es fundamental para decisiones informadas en contextos de incertidumbre y riesgo. Conclusion
